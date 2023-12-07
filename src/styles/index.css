@@ -1,12 +1,177 @@
+.containerGrid {
+  height: 100vh;
+  background-image: url(https://cdn.osxdaily.com/wp-content/uploads/2017/06/get-ios-11-default-wallpaper.jpg);
+  background-size: cover;
+  display: grid;
+  place-content: center;
+}
+.box {
+  padding: 20px;
+  width: 700px;
+  min-height: 280px;
+  background-color: rgba(255, 255, 255, 0.233);
+  border-radius: 20px;
+  border: 2px solid white;
+  backdrop-filter: blur(1px);
+}
+.btnEliminar {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  background-color: rgba(53, 53, 53, 0.477);
+  border: 1px solid rgba(255, 255, 255, 0.313);
+  backdrop-filter: blur(1px);
+  color: white;
+}
+.imgBox {
+  display: grid;
+  place-content: center;
+  width: 90px;
+  height: 90px;
+  border-radius: 20%;
+  background: linear-gradient(
+    90deg,
+    hsla(152, 100%, 50%, 1) 0%,
+    hsla(186, 100%, 69%, 1) 100%
+  );
+}
+.imgHeader {
+  width: 80px;
+  height: 80px;
+  border-radius: 20%;
+}
+/* Boton Agregar */
+.Btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background: linear-gradient(144deg, #40cfff, #2aedb3 50%, #00b098);
+}
+
+.sign {
+  padding-bottom: 5px;
+  width: 100%;
+  font-size: 2em;
+  color: white;
+  transition-duration: 0.3s;
+  display: grid;
+  place-items: center;
+}
+
+.text {
+  position: absolute;
+  padding-left: 4px;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1em;
+  font-weight: lighter;
+  transition-duration: 0.3s;
+}
+
+.Btn:hover {
+  width: 125px;
+  transition-duration: 0.3s;
+}
+
+.Btn:hover .sign {
+  width: 30%;
+  transition-duration: 0.3s;
+  padding-left: 15px;
+}
+
+.Btn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: 0.3s;
+  padding-right: 15px;
+}
+
+.Btn:active {
+  transform: translate(2px, 2px);
+}
 
 /* 
+Boton Cerrar X */
+.button {
+  position: relative;
+  width: 2.3em;
+  height: 2.3em;
+  border: none;
+  background: rgba(180, 83, 107, 0.11);
+  border-radius: 5px;
+  transition: background 0.5s;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.X {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2em;
+  height: 1.5px;
+  background-color: rgb(255, 255, 255);
+  transform: translateX(-50%) rotate(45deg);
+}
 
-*/
+.Y {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2em;
+  height: 1.5px;
+  background-color: #fff;
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+.close {
+  position: absolute;
+  display: flex;
+  padding: 0.8rem 1.5rem;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  top: -70%;
+  left: 50%;
+  width: 3em;
+  height: 1.7em;
+  font-size: 12px;
+  background-color: rgb(19, 22, 24);
+  color: rgb(187, 229, 236);
+  border: none;
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.button:hover {
+  background-color: rgb(211, 21, 21);
+}
+
+.button:active {
+  background-color: rgb(130, 0, 0);
+}
+
+.button:hover > .close {
+  animation: close 0.2s forwards 0.25s;
+}
+
+@keyframes close {
+  100% {
+    opacity: 1;
+  }
+}
