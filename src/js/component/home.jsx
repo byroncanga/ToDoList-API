@@ -79,6 +79,8 @@ const Home = () => {
             </div>
           ))}
         </div>
+        <hr />
+        <p className="text-light">Total de Tareas {tasks.length}</p>
       </div>
     </div>
   );
