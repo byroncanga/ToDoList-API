@@ -20,6 +20,10 @@ const Home = () => {
   };
 
   const handleNewTask = () => {
+    if (inputValue.trim() === "") {
+      alert("Por favor, ingresa una tarea válida.");
+      return;
+    }
     const newTasks = [...tasks, inputValue];
     setTasks(newTasks);
     setInputValue("");
