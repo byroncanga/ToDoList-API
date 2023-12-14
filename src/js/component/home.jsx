@@ -1,38 +1,55 @@
 import React, { useState, useEffect } from "react";
 
 const Home = () => {
+  const endpoint =
+    "https://playground.4geeks.com/apis/fake/todos/user/byroncanga";
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
+  const getApi = async () => {
+    const response = await fetch(endpoint);
+    const data = await response.json();
+    setTasks(data);
+  };
+
   useEffect(() => {
-    const storedTasks = localStorage.getItem("tasks");
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    }
+    getApi();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
-
+  //envia el Task al API
+  const sendTaskApi = async (task) => {
+    const responde = await fetch(endpoint, {
+      method: "PUT",
+      body: JSON.stringify(task),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+  //captura el evento input
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
+  //crea el task en la lista
   const handleNewTask = () => {
     if (inputValue.trim() === "") {
       alert("Por favor, ingresa una tarea válida.");
       return;
     }
-    const newTasks = [...tasks, inputValue];
+    const newTasks = [...tasks, { done: false, label: inputValue }];
     setTasks(newTasks);
     setInputValue("");
+    sendTaskApi(newTasks);
   };
 
+  //elimina el task de la lista
   const handleDeleteTask = (index) => {
     const newTasks = tasks.filter((_, idx) => idx !== index);
     setTasks(newTasks);
+    sendTaskApi(newTasks);
   };
+
   const fechaActual = new Date().toLocaleDateString();
 
   return (
@@ -77,18 +94,21 @@ const Home = () => {
         </div>
         <div>
           {tasks.map((task, index) => (
-            <div className="d-flex align-items-center justify-content-between">
-              <div
-                className="w-100 bg-light p-2 rounded-2 my-2 mx-1"
-                key={index}
-              >
-                {task}
+            <div
+              className="d-flex align-items-center justify-content-between"
+              key={index}
+            >
+              <div className="w-100 bg-light p-2 rounded-2 my-2 mx-1">
+                {task.label}
               </div>
               <div>
-                <button class="button" onClick={() => handleDeleteTask(index)}>
-                  <span class="X"></span>
-                  <span class="Y"></span>
-                  <div class="close">Close</div>
+                <button
+                  className="button"
+                  onClick={() => handleDeleteTask(index)}
+                >
+                  <span className="X"></span>
+                  <span className="Y"></span>
+                  <div className="close">Close</div>
                 </button>
               </div>
             </div>
